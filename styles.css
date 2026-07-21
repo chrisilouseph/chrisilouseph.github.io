@@ -132,7 +132,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--accent-hover); 
 .quote-card blockquote { margin:0; font:400 16px/1.6 "Geist", Inter, ui-sans-serif, system-ui, sans-serif; }
 .quote-attribution { margin-top:14px; display:flex; flex-direction:column; gap:5px; }
 .quote-card cite { font-style:normal; font-size:13px; line-height:1.5; color:var(--muted); font-weight:650; }
-.quote-context { color: var(--accent); font-size:13px; line-height:1.45; font-style:italic; }
+.quote-context { color: var(--accent); font-size:13px; line-height:1.45; font-style:normal; }
 
 /* Research */
 .paper-list { display:grid; gap:24px; }
