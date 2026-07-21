@@ -19,7 +19,6 @@ window.MathJax = {
 };
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-<script defer="" src="script.js"></script>
 </head>
 <body class="warm-page">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -126,5 +125,42 @@ window.MathJax = {
 </section>
 </main>
 <footer class="site-footer"><div class="shell footer-grid"><p class="footer-name">Chrisil Ouseph</p><div class="footer-links"><a href="mailto:couseph@purdue.edu">Email</a></div></div></footer>
+<script>
+(() => {
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.site-nav');
+  if (!toggle || !nav) return;
+
+  const setMenuOpen = (open) => {
+    nav.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  };
+
+  toggle.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setMenuOpen(!nav.classList.contains('open'));
+  });
+
+  nav.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setMenuOpen(false);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (window.innerWidth <= 760 && nav.classList.contains('open') &&
+        !nav.contains(event.target) && !toggle.contains(event.target)) {
+      setMenuOpen(false);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMenuOpen(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 760) setMenuOpen(false);
+  });
+})();
+</script>
 </body>
 </html>

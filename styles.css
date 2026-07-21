@@ -50,7 +50,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--accent-hover); 
   border-bottom: 1px solid rgba(20,35,51,.14);
   backdrop-filter: blur(16px);
 }
-.nav-wrap { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+.nav-wrap { position: relative; min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; text-decoration: none; letter-spacing: -.02em; white-space: nowrap; }
 .brand-mark {
   width: 39px; height: 39px; display: grid; place-items: center;
@@ -73,7 +73,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--accent-hover); 
 .site-nav a[aria-current="page"] { background: var(--accent); color: white; }
 .site-nav .nav-cta { background: var(--accent); color: white; }
 .site-nav .nav-cta:hover { background: var(--accent-hover); color: white; }
-.menu-toggle { display:none; width:44px; height:40px; padding:8px; border:2px solid var(--ink); border-radius:10px; background:white; box-shadow:3px 3px 0 var(--ink); }
+.menu-toggle { display:none; width:44px; height:40px; padding:8px; border:2px solid var(--ink); border-radius:10px; background:white; box-shadow:3px 3px 0 var(--ink); cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
 .menu-toggle span:not(.sr-only) { display:block; height:2px; margin:4px 0; background:var(--ink); }
 
 /* Shared type and section system */
@@ -132,7 +132,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--accent-hover); 
 .quote-card blockquote { margin:0; font:400 16px/1.6 "Geist", Inter, ui-sans-serif, system-ui, sans-serif; }
 .quote-attribution { margin-top:14px; display:flex; flex-direction:column; gap:5px; }
 .quote-card cite { font-style:normal; font-size:13px; line-height:1.5; color:var(--muted); font-weight:650; }
-.quote-context { color: var(--accent); font-size:13px; line-height:1.45; font-style:normal; }
+.quote-context { color: var(--accent); font-size:13px; line-height:1.45; font-style:italic; }
 
 /* Research */
 .paper-list { display:grid; gap:24px; }
@@ -209,11 +209,14 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--accent-hover); 
   .brand-mark { width:36px; height:36px; }
   .menu-toggle { display:block; }
   .site-nav {
-    position:absolute; left:14px; right:14px; top:68px;
-    display:none; flex-direction:column; align-items:stretch; gap:6px;
+    position:absolute; left:0; right:0; top:calc(100% + 8px); z-index:1000;
+    display:flex; flex-direction:column; align-items:stretch; gap:6px;
+    max-height:calc(100vh - 92px); overflow-y:auto; overscroll-behavior:contain;
     padding:12px; background:white; border:2px solid var(--ink); border-radius:14px; box-shadow:var(--shadow-sm);
+    opacity:0; visibility:hidden; pointer-events:none; transform:translateY(-8px);
+    transition:opacity .16s ease, transform .16s ease, visibility .16s ease;
   }
-  .site-nav.open { display:flex; }
+  .site-nav.open { opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0); }
   .site-nav a { width:100%; justify-content:flex-start; padding:11px 12px; font-size:15px; }
   .site-nav .nav-cta { margin-top:2px; }
   .home-hero { padding:54px 0 64px; gap:44px; }

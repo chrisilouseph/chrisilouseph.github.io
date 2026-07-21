@@ -19,7 +19,6 @@ window.MathJax = {
 };
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-<script defer="" src="script.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -33,14 +32,14 @@ window.MathJax = {
 <main id="main">
 <section class="page-hero shell compact">
 <p class="eyebrow">01 / Research</p>
-<h1 class="page-title research-page-title">Topology and Regularity in \(C^*\)-algebras</h1>
-<p class="page-intro research-statement">My research lies at the interface of topology and the comparison theory of \(C^*\)-algebras. In particular, I have been trying to understand how much regularity properties such as pureness and \(\mathcal{Z}\)-stability determine the homotopy behavior of Cuntz equivalence classes. I am also interested in the extent of the failure of regularity, measured by invariants like the radius of comparison or growth rank, arising due to various topological obstructions.</p>
+<h1 class="page-title research-page-title">Topology, Regularity, and \(C^*\)-algebras</h1>
+<p class="page-intro research-statement">My research lies at the interface of topology and the structure theory of \(C^*\)-algebras, with particular emphasis on homotopy phenomena for Cuntz classes and on the role of regularity properties such as pureness and \(\mathcal{Z}\)-stability. I am also interested in topological obstructions and pathological phenomena that arise in the absence of regularity.</p>
 </section>
 <section class="section shell">
 <div class="section-heading"><p class="mono-label accent-label">02 / Papers</p><h2>Current research</h2></div>
 <div class="paper-list">
-<article class="paper-card"><div class="paper-meta"><span class="paper-state">In preparation</span><span class="paper-index">01</span></div><h3>Homotopies of Constant Cuntz Class in Pure \(C^*\)-algebras</h3><p>Joint with Andrew S. Toms.</p><span class="paper-link muted">In preparation</span></article>
-<article class="paper-card"><div class="paper-meta"><span class="paper-state">Preprint · 2024</span><span class="paper-index">02</span></div><h3>Contractible Cuntz classes in \(\mathcal{Z}\)-stable \(C^*\)-algebras</h3><p>Joint with Andrew S. Toms.</p><a class="paper-link" href="https://arxiv.org/abs/2412.12366" rel="noreferrer" target="_blank">Read on arXiv <span aria-hidden="true">↗</span></a></article>
+<article class="paper-card"><div class="paper-meta"><span class="paper-state">In preparation</span><span class="paper-index">01</span></div><h3>Homotopies of Constant Cuntz Class in Pure \(C^*\)-algebras</h3><p>With Andrew S. Toms.</p><span class="paper-link muted">In preparation</span></article>
+<article class="paper-card"><div class="paper-meta"><span class="paper-state">Preprint · 2024</span><span class="paper-index">02</span></div><h3>Contractible Cuntz classes in \(\mathcal{Z}\)-stable \(C^*\)-algebras</h3><p>With Andrew S. Toms.</p><a class="paper-link" href="https://arxiv.org/abs/2412.12366" rel="noreferrer" target="_blank">Read on arXiv <span aria-hidden="true">↗</span></a></article>
 </div>
 </section>
 <section class="section shell research-activities">
@@ -62,5 +61,42 @@ window.MathJax = {
 </article>
 </section></main>
 <footer class="site-footer"><div class="shell footer-grid"><p class="footer-name">Chrisil Ouseph</p><div class="footer-links"><a href="mailto:couseph@purdue.edu">Email</a></div></div></footer>
+<script>
+(() => {
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.site-nav');
+  if (!toggle || !nav) return;
+
+  const setMenuOpen = (open) => {
+    nav.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  };
+
+  toggle.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setMenuOpen(!nav.classList.contains('open'));
+  });
+
+  nav.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setMenuOpen(false);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (window.innerWidth <= 760 && nav.classList.contains('open') &&
+        !nav.contains(event.target) && !toggle.contains(event.target)) {
+      setMenuOpen(false);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMenuOpen(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 760) setMenuOpen(false);
+  });
+})();
+</script>
 </body>
 </html>
